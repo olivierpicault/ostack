@@ -1,0 +1,7 @@
+{
+  "name": "ostack",
+  "owner": { "name": "Olivier" },
+  "plugins": [
+    { "name": "ostack", "source": "./", "description": "Olivier's rules and skills for Claude Code." }
+  ]
+}
