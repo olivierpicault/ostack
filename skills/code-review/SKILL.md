@@ -78,17 +78,20 @@ language:
 ## Verdict: ✅ ready / ⚠️ fix before MR / ❌ blocking
 
 ### 🔴 Blocking
-- `path/file.py:42` — <problem> → <impact> → <fix>
+1. `path/file.py:42` — <problem> → <impact> → <fix>
+2. ...
 
 ### 🟠 To fix
-- ...
+3. ...
 
 ### 🟡 Nits
-- ...
+4. ...
 
 Rejected after verification: <N>
 ```
 
+- Number findings 1, 2, 3… across the whole report: numbering does not
+  restart in each section, so each number points to one finding.
 - Keep "to check" on findings that were not sure.
 - Nothing to report → say so plainly.
 - End with: "Shall I fix the blocking issues?" (in the user's language).
