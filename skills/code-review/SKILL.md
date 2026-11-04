@@ -2,7 +2,7 @@
 name: code-review
 description: >
   Full review of my changes before opening a MR/PR: bugs, security,
-  architecture, performance and my ostack rules, each read by a separate agent with no
+  architecture, performance, tests and my ostack rules, each read by a separate agent with no
   context from this conversation. Use for "code review", "review my changes",
   "review before MR", "relis mon code avant la MR".
 ---
@@ -29,11 +29,11 @@ git log --oneline @{upstream}..HEAD
 
 If the base is unclear, ask one short question.
 
-## 2. Launch the five reviewers
+## 2. Launch the six reviewers
 
-In a single message, launch these five agents in parallel:
+In a single message, launch these six agents in parallel:
 `ostack:review-bugs`, `ostack:review-security`, `ostack:review-architecture`,
-`ostack:review-performance`, `ostack:review-ostack`.
+`ostack:review-performance`, `ostack:review-tests`, `ostack:review-ostack`.
 
 Send each one exactly this prompt, nothing else. No summary of the work, no
 opinion on the code, nothing from this conversation.

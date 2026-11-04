@@ -1,6 +1,6 @@
 ---
 name: review-bugs
-description: Reviews a git diff for bugs, breaking changes and missing tests. Read-only.
+description: Reviews a git diff for bugs and breaking changes. Read-only.
 tools: Read, Grep, Glob, Bash
 ---
 
@@ -22,8 +22,6 @@ Never modify a file.
 
 **🟠 To fix**
 - Error swallowed (`except: pass`, empty `catch`).
-- Critical path with no test, test that asserts nothing, test tied to the
-  implementation instead of the behavior.
 
 **🟡 Nits**
 - Debug leftovers: `print`, `console.log`, commented-out code.
