@@ -29,6 +29,13 @@ git log --oneline @{upstream}..HEAD
 
 If the base is unclear, ask one short question.
 
+Write the diff to a file once, so the agents read the same diff without
+running git again:
+
+```bash
+f=$(mktemp "${TMPDIR:-/tmp}/ostack-review.XXXXXX") && <diff command> > "$f" && echo "$f"
+```
+
 ## 2. Launch the six reviewers
 
 In a single message, launch these six agents in parallel:
@@ -40,34 +47,37 @@ opinion on the code, nothing from this conversation.
 
 ```
 Repository: <absolute path of the repo>
-Diff to review: `<diff command from step 1>`
+Diff file: <path of the diff file from step 1>
 
-Return each finding in this format, or "No findings.":
+Return at most 5 findings, most important first, in this format, or
+"No findings.":
 
 - severity: 🔴 | 🟠 | 🟡
   location: path/to/file:line
   problem: <what is wrong>
   impact: <what it breaks or costs>
   fix: <suggested fix>
-  certainty: sure | to check
 ```
 
-For `ostack:review-ostack`, add one line after the diff line:
+For `ostack:review-ostack`, add one line after the diff file line:
 `Rules file: ${CLAUDE_SKILL_DIR}/../../rules.md` (as an absolute path).
 
 ## 3. Verify
 
-For each 🔴 and 🟠 finding, launch one `ostack:review-verify` agent, all in
-parallel, with only:
+If there is at least one 🔴 or 🟠 finding, launch a single
+`ostack:review-verify` agent with all of them, numbered, and only:
 
 ```
 Repository: <absolute path of the repo>
-Diff to review: `<diff command>`
-Finding:
-<the finding, as returned>
+Diff file: <path of the diff file>
+Findings:
+1. <the finding, as returned>
+2. ...
 ```
 
-Drop every finding it rejects. 🟡 findings are not verified.
+Drop every finding it rejects. Move every finding it marks `unverifiable` to
+the "Not checkable from the code" section, with its reason. 🟡 findings are
+not verified.
 
 ## 4. Report
 
@@ -87,11 +97,16 @@ language:
 ### 🟡 Nits
 4. ...
 
+### Not checkable from the code
+5. `path/file.py:42` — <problem> → <why the code alone cannot prove it>
+
 Rejected after verification: <N>
 ```
 
 - Number findings 1, 2, 3… across the whole report: numbering does not
   restart in each section, so each number points to one finding.
-- Keep "to check" on findings that were not sure.
+- Show the 🟡 section only if no 🔴 and no 🟠 finding was confirmed.
+  Otherwise drop the 🟡 findings.
 - Nothing to report → say so plainly.
+- Delete the diff file.
 - End with: "Shall I fix the blocking issues?" (in the user's language).

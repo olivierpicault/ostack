@@ -30,4 +30,3 @@ Never modify a file.
 
 - Only report on lines the diff changes, or code the diff directly affects.
 - Three real problems beat twenty small ones.
-- When you are not sure, set `certainty: to check`.

@@ -30,4 +30,3 @@ exploited is 🟠.
 
 - Only report on lines the diff changes, or code the diff directly affects.
 - Show how the problem can be reached: which input, which path.
-- When you are not sure, set `certainty: to check`.

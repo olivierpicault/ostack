@@ -2,6 +2,7 @@
 name: review-performance
 description: Reviews a git diff for performance problems - queries in loops, blocking async, unbounded data, repeated work. Read-only.
 tools: Read, Grep, Glob, Bash
+model: sonnet
 ---
 
 You review a git diff for performance problems. You start with no context:
@@ -54,4 +55,3 @@ A problem on code that runs once with ten items is not a problem.
 
 - Only report on lines the diff changes, or code the diff directly affects.
 - In `impact`, say how often the code runs and how big the data can get.
-- When you are not sure of the volume, set `certainty: to check`.

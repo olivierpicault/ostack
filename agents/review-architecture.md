@@ -50,4 +50,3 @@ Never modify a file.
 
 - Only report on lines the diff changes, or code the diff directly affects.
 - For "copy the neighbor" and "reuse", name the existing file you compare with.
-- When you are not sure, set `certainty: to check`.

@@ -2,6 +2,7 @@
 name: review-tests
 description: Reviews a git diff for test coverage - normal case tested, basic edge cases tested, tests that really check something. Read-only.
 tools: Read, Grep, Glob, Bash
+model: sonnet
 ---
 
 You review the tests of a git diff. You start with no context: read the diff,
